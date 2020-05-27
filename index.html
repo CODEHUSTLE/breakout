@@ -27,19 +27,31 @@
       let dx = 2;
       let dy = -2;
 
+      let ballRadius = 10;
+
       function drawBall() {
         ctx.beginPath();
-        ctx.arc(x, y, 10, 0, Math.PI * 2);
-        ctx.fillStyle = '#0095DD';
+        ctx.arc(x, y, ballRadius, 0, Math.PI * 2);
+        ctx.fillStyle = `#FF0000`;
         ctx.fill();
         ctx.closePath();
       }
+
+      //let randomColor = Math.floor(Math.random() * 16777215).toString(16);
 
       function draw() {
         ctx.clearRect(0, 0, canvas.width, canvas.height);
         drawBall();
         x += dx;
         y += dy;
+
+        if (x + dx > canvas.width - ballRadius || x + dx < ballRadius) {
+          dx = -dx;
+        }
+
+        if (y + dy > canvas.height - ballRadius || y + dy < ballRadius) {
+          dy = -dy;
+        }
       }
       setInterval(draw, 10);
     </script>
